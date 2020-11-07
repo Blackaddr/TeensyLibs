@@ -1,3 +1,9 @@
 [submodule "scripts/teensylibs_build_engine"]
 	path = scripts/teensylibs_build_engine
 	url = ssh://git@github.com/Blackaddr/teensylibs_build_engine.git
+[submodule "libs/Wire"]
+	path = libs/Wire
+	url = https://github.com/PaulStoffregen/Wire.git
+[submodule "libs/Audio"]
+	path = libs/Audio
+	url = https://github.com/PaulStoffregen/Audio.git
