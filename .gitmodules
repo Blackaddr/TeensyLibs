@@ -1,0 +1,3 @@
+[submodule "scripts/teensylibs_build_engine"]
+	path = scripts/teensylibs_build_engine
+	url = ssh://git@github.com/Blackaddr/teensylibs_build_engine.git
