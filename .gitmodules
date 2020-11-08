@@ -10,3 +10,6 @@
 [submodule "libs/SPI"]
 	path = libs/SPI
 	url = https://github.com/PaulStoffregen/SPI.git
+[submodule "libs/Encoder"]
+	path = libs/Encoder
+	url = https://github.com/PaulStoffregen/Encoder.git

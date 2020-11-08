@@ -1,6 +1,7 @@
 LIBRARY_LIST = \
     Wire \
     SPI \
+    Encoder \
     Audio
 
 all:
