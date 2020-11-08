@@ -11,16 +11,16 @@ TARGET_NAME = Bounce2
 DOC_PATH_DOXYGEN =
 
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
-CPP_SRC_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.cpp)))
-#CPP_SRC_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.cpp)))
+CPP_SRC_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.cpp)))
+#CPP_SRC_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/utility/*.cpp)))
 
 C_SRC_LIST =
 
 S_SRC_LIST = 
 
 # Do not include $(TARGET_NAME).h in API_HEADER LIST. This file is required and handled separately.
-API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
-#API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
+API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.h)))
+#API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/utility/*.h)))
 
 # List of Git-repo dependencies
 DEP_BUILD_LIST =
@@ -28,7 +28,7 @@ DEP_BUILD_LIST =
 # List of system include/lib directories not checked by default by your compiler.
 # Always use the -I=<dir> and -L=<dir> syntax, not -I<dir>, etc.
 #-Isrc/i2c/$(TARGET_OS) - is needed to include the correct i2cOs.h
-SYS_INC_DIRS  = -I$(CURDIR)/$(REPO_LOCATION)/$(TARGET_NAME)/utility
+SYS_INC_DIRS  =
 SYS_LIBS_DIRS =
 
 # List of libraries to be compiled and linked dynamically. This is required for LGPL licenced libraries. Optional for others.
