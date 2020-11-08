@@ -52,7 +52,7 @@ PREPROC_DEFINES_LIST =
 
 MAKEFILE_NAME ?= Makefile
 
-# Check if build engine location has already been defined
-export BUILD_ENGINE_LOC ?= $(CURDIR)/scripts/teensylibs_build_engine/
+# This library must always use it's local, custom build engine.
+export BUILD_ENGINE_LOC = $(CURDIR)/scripts/teensylibs_build_engine/
 include $(BUILD_ENGINE_LOC)/Makefile.inc
 
