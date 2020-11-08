@@ -23,14 +23,14 @@ S_SRC_LIST = \
     /memcpy_audio
 
 # Do not include $(TARGET_NAME).h in API_HEADER LIST. This file is required and handled separately.
-API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
-API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
+#API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
+#API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
 
-#API_HEADER_LIST += \
-#    /Audio \
-#    /memcpy_audio \
-#    /input_i2s \
-#    /output_i2s                  
+API_HEADER_LIST += \
+    /Audio \
+    /memcpy_audio \
+    /input_i2s \
+    /output_i2s                  
 
 # List of Git-repo dependencies
 DEP_BUILD_LIST =
