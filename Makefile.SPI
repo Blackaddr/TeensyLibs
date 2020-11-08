@@ -29,7 +29,7 @@ DEP_BUILD_LIST =
 # List of system include/lib directories not checked by default by your compiler.
 # Always use the -I=<dir> and -L=<dir> syntax, not -I<dir>, etc.
 #-Isrc/i2c/$(TARGET_OS) - is needed to include the correct i2cOs.h
-SYS_INC_DIRS  = -I$(CURDIR)/$(REPO_LOCATION)/$(TARGET_NAME)/utility
+SYS_INC_DIRS  = 
 SYS_LIBS_DIRS =
 
 # List of libraries to be compiled and linked dynamically. This is required for LGPL licenced libraries. Optional for others.
