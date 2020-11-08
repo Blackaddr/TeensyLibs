@@ -13,3 +13,6 @@
 [submodule "libs/Encoder"]
 	path = libs/Encoder
 	url = https://github.com/PaulStoffregen/Encoder.git
+[submodule "libs/Bounce2"]
+	path = libs/Bounce2
+	url = https://github.com/PaulStoffregen/Bounce2.git

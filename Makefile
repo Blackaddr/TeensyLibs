@@ -2,6 +2,7 @@ LIBRARY_LIST = \
     Wire \
     SPI \
     Encoder \
+    Bounce2 \
     Audio
 
 all:
