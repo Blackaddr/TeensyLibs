@@ -23,13 +23,14 @@ S_SRC_LIST = \
     /memcpy_audio
 
 # Do not include $(TARGET_NAME).h in API_HEADER LIST. This file is required and handled separately.
-#API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
-#API_HEADER_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
-API_HEADER_LIST += \
-    /Audio \
-    /memcpy_audio \
-    /input_i2s \
-    /output_i2s                  
+API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
+API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
+
+#API_HEADER_LIST += \
+#    /Audio \
+#    /memcpy_audio \
+#    /input_i2s \
+#    /output_i2s                  
 
 # List of Git-repo dependencies
 DEP_BUILD_LIST =
@@ -39,10 +40,6 @@ DEP_BUILD_LIST =
 #-Isrc/i2c/$(TARGET_OS) - is needed to include the correct i2cOs.h
 SYS_INC_DIRS  = -I$(CURDIR)/$(REPO_LOCATION)/$(TARGET_NAME)/utility
 SYS_LIBS_DIRS =
-
-# List of libraries to be compiled and linked dynamically. This is required for LGPL licenced libraries. Optional for others.
-# example: SYS_DYN_LIBS_LIST = GLEW glfw GL freetype X11 Xxf86vm Xrandr pthread Xi jpeg tiff avcodecm
-SYS_DYN_LIBS_LIST =
 
 # List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
 # example: SYS_STAT_LIBS_LIST = wscSysUtil wscFrame
