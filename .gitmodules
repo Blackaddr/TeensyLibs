@@ -7,3 +7,6 @@
 [submodule "libs/Audio"]
 	path = libs/Audio
 	url = https://github.com/PaulStoffregen/Audio.git
+[submodule "libs/SPI"]
+	path = libs/SPI
+	url = https://github.com/PaulStoffregen/SPI.git
