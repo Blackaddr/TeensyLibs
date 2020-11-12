@@ -50,6 +50,6 @@ PREPROC_DEFINES_LIST =
 MAKEFILE_NAME ?= Makefile
 
 # This library must always use it's local, custom build engine.
-export BUILD_ENGINE_LOC = $(CURDIR)/scripts/teensylibs_build_engine/
-include $(BUILD_ENGINE_LOC)/Makefile.inc
+export TEENSY_BUILD_ENGINE_LOC = $(CURDIR)/scripts/teensylibs_build_engine/
+include $(TEENSY_BUILD_ENGINE_LOC)/Makefile.inc
 
