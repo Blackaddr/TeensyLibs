@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ $# -eq 0 ]; then
+    echo "USAGE: ./update_libs <path to teensyduino libraries"
+    exit 1
+fi
+
+rm -rf ../libs/*
+cp -a $1/Audio ../libs/
+cp -a $1/Bounce2 ../libs/
+cp -a $1/Encoder ../libs/
+cp -a $1/Wire ../libs/
+cp -a $1/SPI ../libs/
