@@ -1,16 +1,5 @@
-From e32da975d2aa756f351a7e02ace937d780ed3423 Mon Sep 17 00:00:00 2001
-From: Steve Lascos <steve@blackaddr.com>
-Date: Sun, 8 Nov 2020 07:24:40 -0500
-Subject: [PATCH] Removing unnecessary header files from Audio.h
-
----
- Audio.h | 150 ++++++++++++++++++++++++++++----------------------------
- 1 file changed, 75 insertions(+), 75 deletions(-)
-
-diff --git a/Audio.h b/Audio.h
-index 4690c4c..4ed8f1d 100644
---- a/Audio.h
-+++ b/Audio.h
+--- ../libs/Audio/Audio.h	2020-11-14 08:43:19.124850867 -0500
++++ ../libs/Audio/Audio.h.patched	2020-11-14 08:43:09.324822561 -0500
 @@ -58,82 +58,82 @@
  // include all the library headers, so a sketch can use a single
  // #include <Audio.h> to get the whole library
@@ -169,6 +158,3 @@ index 4690c4c..4ed8f1d 100644
 +//#include "synth_wavetable.h"
  
  #endif
--- 
-2.20.1
-
