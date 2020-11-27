@@ -1,4 +1,5 @@
 LIBRARY_LIST = \
+    cores \
     Wire \
     SPI \
     Encoder \
