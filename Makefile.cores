@@ -13,6 +13,7 @@ DOC_PATH_DOXYGEN =
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
 CPP_SRC_LIST += \
     /teensy4/AudioStream \
+    /teensy4/DMAChannel \
     /teensy4/EventResponder \
     /teensy4/HardwareSerial2 \
     /teensy4/HardwareSerial1 \
