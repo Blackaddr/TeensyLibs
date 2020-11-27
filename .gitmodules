@@ -16,3 +16,6 @@
 [submodule "libs/Bounce2"]
 	path = libs/Bounce2
 	url = https://github.com/PaulStoffregen/Bounce2.git
+[submodule "libs/cores"]
+	path = libs/cores
+	url = https://github.com/PaulStoffregen/cores.git

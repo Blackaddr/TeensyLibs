@@ -1,0 +1,165 @@
+# Library version.  Must use Semantic Versioning 'x.y.z'.  E.g. '1.5.2'
+LIB_MAJOR_VER = 0
+LIB_MINOR_VER = 0
+LIB_PATCH_VER = 0
+LIB_VER = $(LIB_MAJOR_VER).$(LIB_MINOR_VER).$(LIB_PATCH_VER)
+
+# Name of the library (do not prefix with 'lib'), e.g. wscMyUtil
+REPO_DIR = libs
+TARGET_NAME = cores
+
+DOC_PATH_DOXYGEN =
+
+# List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
+CPP_SRC_LIST += \
+    /teensy4/AudioStream \
+    /teensy4/EventResponder \
+    /teensy4/HardwareSerial2 \
+    /teensy4/HardwareSerial1 \
+    /teensy4/HardwareSerial4 \
+    /teensy4/HardwareSerial3 \
+    /teensy4/HardwareSerial \
+    /teensy4/HardwareSerial5 \
+    /teensy4/HardwareSerial6 \
+    /teensy4/HardwareSerial7 \
+    /teensy4/HardwareSerial8 \
+    /teensy4/IPAddress \
+    /teensy4/IntervalTimer \
+    /teensy4/Print \
+    /teensy4/Stream \
+    /teensy4/Tone \
+    /teensy4/WMath \
+    /teensy4/WString \
+    /teensy4/new \
+    /teensy4/main \
+    /teensy4/serialEvent \
+    /teensy4/serialEvent1 \
+    /teensy4/serialEvent2 \
+    /teensy4/serialEvent3 \
+    /teensy4/serialEvent4 \
+    /teensy4/serialEvent5 \
+    /teensy4/serialEvent6 \
+    /teensy4/serialEvent7 \
+    /teensy4/serialEvent7 \
+    /teensy4/serialEventUSB1 \
+    /teensy4/serialEventUSB2 \
+    /teensy4/usb_audio \
+    /teensy4/usb_flightsim \
+    /teensy4/usb_inst \
+    /teensy4/yield
+   
+C_SRC_LIST = \
+    /teensy4/analog \
+    /teensy4/clockspeed \
+    /teensy4/interrupt \
+    /teensy4/bootdata \
+    /teensy4/debugprintf \
+    /teensy4/delay \
+    /teensy4/digital \
+    /teensy4/eeprom \
+    /teensy4/keylayouts \
+    /teensy4/nonstd \
+    /teensy4/pwm \
+    /teensy4/rtc \
+    /teensy4/startup \
+    /teensy4/tempmon \
+    /teensy4/usb \
+    /teensy4/usb_desc \
+    /teensy4/usb_joystick \
+    /teensy4/usb_keyboard \
+    /teensy4/usb_midi \
+    /teensy4/usb_mouse \
+    /teensy4/usb_rawhid \
+    /teensy4/usb_seremu \
+    /teensy4/usb_serial \
+    /teensy4/usb_serial2 \
+    /teensy4/usb_touch \
+    /teensy4/usb_serial3
+
+S_SRC_LIST = \
+    /teensy4/memcpy-armv7m \
+    /teensy4/memset
+
+API_HEADER_LIST += \
+    /teensy4/Arduino \
+    /teensy4/arm_common_tables \
+    /teensy4/arm_const_structs \
+    /teensy4/arm_math \
+    /teensy4/AudioStream \
+    /teensy4/avr_emulation \
+    /teensy4/avr_functions \
+    /teensy4/binary \
+    /teensy4/Client \
+    /teensy4/core_cm7 \
+    /teensy4/core_cmInstr \
+    /teensy4/core_id \
+    /teensy4/core_pins \
+    /teensy4/DMAChannel \
+    /teensy4/elapsedMillis \
+    /teensy4/EventResponder \
+    /teensy4/HardwareSerial \
+    /teensy4/imxrt \
+    /teensy4/IntervalTimer \
+    /teensy4/IPAddress \
+    /teensy4/Keyboard \
+    /teensy4/keylayouts \
+    /teensy4/math_helper \
+    /teensy4/MIDIUSB \
+    /teensy4/Mouse \
+    /teensy4/pgmspace \
+    /teensy4/pins_arduino \
+    /teensy4/Printable \
+    /teensy4/Print \
+    /teensy4/Server \
+    /teensy4/Stream \
+    /teensy4/Udp \
+    /teensy4/usb_audio \
+    /teensy4/usb_desc \
+    /teensy4/usb_dev \
+    /teensy4/usb_flightsim \
+    /teensy4/usb_joystick \
+    /teensy4/usb_keyboard \
+    /teensy4/usb_midi \
+    /teensy4/usb_mouse \
+    /teensy4/usb_names \
+    /teensy4/usb_rawhid \
+    /teensy4/usb_seremu \
+    /teensy4/usb_serial \
+    /teensy4/usb_touch \
+    /teensy4/WCharacter \
+    /teensy4/wiring \
+    /teensy4/wiring_private \
+    /teensy4/WProgram \
+    /teensy4/WString
+
+API_HEADER_DIRS_LIST += \
+    /teensy4/avr \
+    /teensy4/debug \
+    /teensy4/util
+
+
+# List of Git-repo dependencies
+DEP_BUILD_LIST =
+
+# List of system include/lib directories not checked by default by your compiler.
+# Always use the -I=<dir> and -L=<dir> syntax, not -I<dir>, etc.
+#-Isrc/i2c/$(TARGET_OS) - is needed to include the correct i2cOs.h
+SYS_INC_DIRS  = \
+    -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/ \
+    -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/avr \
+    -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/util \
+    -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/debug
+SYS_LIBS_DIRS =
+
+# List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
+# example: SYS_STAT_LIBS_LIST = wscSysUtil wscFrame
+SYS_STAT_LIBS_LIST = 
+
+PREPROC_DEFINES_LIST =
+
+MAKEFILE_NAME ?= Makefile
+
+# This library must always use it's local, custom build engine.
+export TEENSY_BUILD_ENGINE_LOC = $(CURDIR)/scripts/teensylibs_build_engine/
+include $(TEENSY_BUILD_ENGINE_LOC)/Makefile.inc
+
