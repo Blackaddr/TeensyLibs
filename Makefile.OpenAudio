@@ -18,7 +18,8 @@ CPP_SRC_LIST = \
     /AudioFilterFIR_F32 \
     /AudioFilterBiquad_F32 \
     /AudioStream_F32 \
-    /mathDSP_F32
+    /mathDSP_F32 \
+    /AudioSettings_F32
    
 C_SRC_LIST =
 
@@ -38,7 +39,8 @@ API_HEADER_LIST = \
     /AudioStream_F32 \
     /mathDSP_F32 \
     /memcpy_audio \
-    /USB_Audio_F32
+    /USB_Audio_F32 \
+    /AudioSettings_F32
 
 API_HEADER_UTIL_LIST += \
     /utility/dma_chan \
