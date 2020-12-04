@@ -4,7 +4,8 @@ LIBRARY_LIST = \
     SPI \
     Encoder \
     Bounce2 \
-    Audio
+    Audio \
+    OpenAudio
 
 all:
 	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)
