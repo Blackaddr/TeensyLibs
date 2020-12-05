@@ -32,7 +32,6 @@ S_SRC_LIST = \
 API_HEADER_LIST = \
     /OpenAudio_ArduinoLibrary \
     /AudioConvert_F32 \
-    /AudioFilterFIR_F32 \
     /AudioFilterBiquad_F32 \
     /AudioFilterFIR_F32 \
     /AudioFilterIIR_F32 \
