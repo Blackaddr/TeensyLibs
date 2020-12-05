@@ -5,7 +5,10 @@ LIBRARY_LIST = \
     Encoder \
     Bounce2 \
     Audio \
-    OpenAudio
+    OpenAudio \
+    Adafruit_SSD1306 \
+    Adafruit_BusIO \
+    Adafruit-GFX-Library
 
 all:
 	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)
