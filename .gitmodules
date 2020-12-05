@@ -22,9 +22,6 @@
 [submodule "libs/OpenAudio"]
 	path = libs/OpenAudio
 	url = https://github.com/chipaudette/OpenAudio_ArduinoLibrary.git
-[submodule "libs/Adafruit_SSD1306"]
-	path = libs/Adafruit_SSD1306
-	url = ssh://git@github.com/PaulStoffregen/Adafruit_SSD1306.git
 [submodule "libs/Adafruit-GFX-Library"]
 	path = libs/Adafruit-GFX-Library
 	url = ssh://git@github.com/adafruit/Adafruit-GFX-Library.git
