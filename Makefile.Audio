@@ -18,7 +18,9 @@ CPP_SRC_LIST += \
     /input_i2s \
     /filter_biquad \
     /filter_fir \
-    /filter_variable
+    /filter_variable \
+    /filter_biquad
+
 CPP_SRC_UTIL_LIST += \
     /utility/imxrt_hw
    
@@ -39,7 +41,8 @@ API_HEADER_LIST += \
     /filter_biquad \
     /filter_fir \
     /filter_variable \
-    /AudioControl
+    /AudioControl \
+    /filter_biquad
 
 API_HEADER_UTIL_LIST += \
     /utility/imxrt_hw     
