@@ -19,6 +19,7 @@ S_SRC_LIST =
 
 # Do not include $(TARGET_NAME).h in API_HEADER LIST. This file is required and handled separately.
 API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.h)))
+API_HEADER_HPP_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .hpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.hpp)))
                    
 
 # List of Git-repo dependencies
