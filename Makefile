@@ -5,6 +5,7 @@ LIBRARY_LIST = \
     Encoder \
     Bounce2 \
     Audio \
+    MIDI \
     OpenAudio \
     Adafruit_SSD1306 \
     Adafruit_BusIO \
