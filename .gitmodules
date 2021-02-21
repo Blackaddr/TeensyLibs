@@ -34,3 +34,6 @@
 [submodule "libs/MIDI"]
 	path = libs/MIDI
 	url = https://github.com/PaulStoffregen/MIDI.git
+[submodule "libs/TeensyThreads"]
+	path = libs/TeensyThreads
+	url = https://github.com/ftrias/TeensyThreads.git

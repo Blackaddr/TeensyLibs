@@ -7,6 +7,7 @@ LIBRARY_LIST = \
     Audio \
     MIDI \
     OpenAudio \
+    TeensyThreads \
     Adafruit_SSD1306 \
     Adafruit_BusIO \
     Adafruit-GFX-Library
