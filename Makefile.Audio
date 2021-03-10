@@ -45,7 +45,8 @@ API_HEADER_LIST += \
     /filter_biquad
 
 API_HEADER_UTIL_LIST += \
-    /utility/imxrt_hw     
+    /utility/imxrt_hw \
+    /utility/dspinst
 
 # List of Git-repo dependencies
 DEP_BUILD_LIST =
