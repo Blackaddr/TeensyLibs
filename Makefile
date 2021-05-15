@@ -10,7 +10,8 @@ LIBRARY_LIST = \
     TeensyThreads \
     Adafruit_SSD1306 \
     Adafruit_BusIO \
-    Adafruit-GFX-Library
+    Adafruit-GFX-Library \
+    WDT_T4
 
 all:
 	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)

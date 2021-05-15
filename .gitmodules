@@ -37,3 +37,6 @@
 [submodule "scripts/teensylibs_build_engine"]
 	path = scripts/teensylibs_build_engine
 	url = ssh://git@bitbucket.org/aviateaudio/teensylibs_build_engine.git
+[submodule "libs/WDT_T4"]
+	path = libs/WDT_T4
+	url = https://github.com/tonton81/WDT_T4.git
