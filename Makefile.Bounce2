@@ -11,7 +11,7 @@ TARGET_NAME = Bounce2
 DOC_PATH_DOXYGEN =
 
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
-CPP_SRC_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.cpp)))
+CPP_SRC_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.cpp)))
 #CPP_SRC_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.cpp)))
 
 C_SRC_LIST =
@@ -19,7 +19,7 @@ C_SRC_LIST =
 S_SRC_LIST = 
 
 # Do not include $(TARGET_NAME).h in API_HEADER LIST. This file is required and handled separately.
-API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/*.h)))
+API_HEADER_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.h)))
 #API_HEADER_UTIL_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/,$(subst .h,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.h)))
 
 # List of Git-repo dependencies

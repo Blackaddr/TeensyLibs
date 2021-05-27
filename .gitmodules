@@ -37,3 +37,6 @@
 [submodule "libs/WDT_T4"]
 	path = libs/WDT_T4
 	url = https://github.com/tonton81/WDT_T4.git
+[submodule "libs/Bounce2"]
+	path = libs/Bounce2
+	url = https://github.com/PaulStoffregen/Bounce2.git
