@@ -1,6 +1,8 @@
---- ../libs/Audio/Audio.h	2020-11-14 08:43:19.124850867 -0500
-+++ ../libs/Audio/Audio.h.patched	2020-11-14 08:43:09.324822561 -0500
-@@ -58,82 +58,82 @@
+diff --git a/Audio.h b/Audio.h
+index 03f3ce4..887d136 100644
+--- a/Audio.h
++++ b/Audio.h
+@@ -58,85 +58,85 @@
  // include all the library headers, so a sketch can use a single
  // #include <Audio.h> to get the whole library
  //
@@ -33,9 +35,11 @@
 -#include "effect_granular.h"
 -#include "effect_combine.h"
 -#include "effect_rectifier.h"
+-#include "effect_wavefolder.h"
 -#include "filter_biquad.h"
 -#include "filter_fir.h"
 -#include "filter_variable.h"
+-#include "filter_ladder.h"
 -#include "input_adc.h"
 -#include "input_adcs.h"
 +//#include "analyze_fft256.h"
@@ -67,9 +71,11 @@
 +//#include "effect_granular.h"
 +//#include "effect_combine.h"
 +//#include "effect_rectifier.h"
++//#include "effect_wavefolder.h"
 +//#include "filter_biquad.h"
 +//#include "filter_fir.h"
 +//#include "filter_variable.h"
++//#include "filter_ladder.h"
 +//#include "input_adc.h"
 +//#include "input_adcs.h"
  #include "input_i2s.h"
@@ -80,6 +86,7 @@
 -#include "input_tdm.h"
 -#include "input_tdm2.h"
 -#include "input_pdm.h"
+-#include "input_pdm_i2s2.h"
 -#include "input_spdif3.h"
 -#include "mixer.h"
 -#include "output_dac.h"
@@ -91,6 +98,7 @@
 +//#include "input_tdm.h"
 +//#include "input_tdm2.h"
 +//#include "input_pdm.h"
++//#include "input_pdm_i2s2.h"
 +//#include "input_spdif3.h"
 +//#include "mixer.h"
 +//#include "output_dac.h"

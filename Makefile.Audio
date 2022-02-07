@@ -15,11 +15,7 @@ DOC_PATH_DOXYGEN =
 #CPP_SRC_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.cpp)))
 CPP_SRC_LIST += \
     /output_i2s \
-    /input_i2s \
-    /filter_biquad \
-    /filter_fir \
-    /filter_variable \
-    /filter_biquad
+    /input_i2s
 
 CPP_SRC_UTIL_LIST += \
     /utility/imxrt_hw
@@ -38,11 +34,7 @@ API_HEADER_LIST += \
     /memcpy_audio \
     /input_i2s \
     /output_i2s \
-    /filter_biquad \
-    /filter_fir \
-    /filter_variable \
-    /AudioControl \
-    /filter_biquad
+    /AudioControl
 
 API_HEADER_UTIL_LIST += \
     /utility/imxrt_hw \
