@@ -1,3 +1,5 @@
+# Note: OpenAudio has been remove from the LIBRARY_LIST
+
 LIBRARY_LIST = \
     cores \
     Wire \
@@ -6,12 +8,12 @@ LIBRARY_LIST = \
     Bounce2 \
     Audio \
     MIDI \
-    OpenAudio \
     TeensyThreads \
-    Adafruit_SSD1306 \
     Adafruit_BusIO \
     Adafruit-GFX-Library \
-    WDT_T4
+    Adafruit_SSD1306 \
+    WDT_T4 \
+    EEPROM
 
 all:
 	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)

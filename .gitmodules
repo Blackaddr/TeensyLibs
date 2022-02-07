@@ -6,7 +6,7 @@
 	url = https://github.com/PaulStoffregen/Audio.git
 [submodule "libs/SPI"]
 	path = libs/SPI
-	url = https://github.com/PaulStoffregen/SPI.git
+	url = https://github.com/PaulStoffregen/SPI
 [submodule "libs/Encoder"]
 	path = libs/Encoder
 	url = https://github.com/PaulStoffregen/Encoder.git
@@ -37,6 +37,9 @@
 [submodule "libs/WDT_T4"]
 	path = libs/WDT_T4
 	url = https://github.com/tonton81/WDT_T4.git
+[submodule "libs/EEPROM"]
+	path = libs/EEPROM
+	url = https://github.com/PaulStoffregen/EEPROM.git
 [submodule "libs/Bounce2"]
 	path = libs/Bounce2
 	url = https://github.com/PaulStoffregen/Bounce2.git
