@@ -13,6 +13,7 @@ DOC_PATH_DOXYGEN =
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
 CPP_SRC_LIST += \
     /teensy4/AudioStream \
+    /teensy4/CrashReport \
     /teensy4/DMAChannel \
     /teensy4/EventResponder \
     /teensy4/HardwareSerial2 \
@@ -51,17 +52,30 @@ CPP_SRC_LIST += \
    
 C_SRC_LIST = \
     /teensy4/analog \
-    /teensy4/clockspeed \
-    /teensy4/interrupt \
     /teensy4/bootdata \
+    /teensy4/clockspeed \
     /teensy4/debugprintf \
     /teensy4/delay \
     /teensy4/digital \
     /teensy4/eeprom \
+    /teensy4/interrupt \
     /teensy4/keylayouts \
     /teensy4/nonstd \
     /teensy4/pwm \
     /teensy4/rtc \
+    /teensy4/sm_alloc_valid \
+    /teensy4/sm_calloc \
+    /teensy4/sm_free \
+    /teensy4/sm_hash \
+    /teensy4/sm_malloc \
+    /teensy4/sm_malloc_stats \
+    /teensy4/sm_pool \
+    /teensy4/sm_realloc \
+    /teensy4/sm_realloc_i \
+    /teensy4/sm_realloc_move \
+    /teensy4/sm_szalloc \
+    /teensy4/sm_util \
+    /teensy4/sm_zalloc \
     /teensy4/startup \
     /teensy4/tempmon \
     /teensy4/usb \
@@ -95,6 +109,7 @@ API_HEADER_LIST += \
     /teensy4/core_cmInstr \
     /teensy4/core_id \
     /teensy4/core_pins \
+    /teensy4/CrashReport \
     /teensy4/DMAChannel \
     /teensy4/elapsedMillis \
     /teensy4/EventResponder \
