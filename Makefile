@@ -5,6 +5,7 @@ LIBRARY_LIST = \
     Wire \
     SPI \
     Encoder \
+    Teensy-4.x-Quad-Encoder-Library \
     Bounce2 \
     Audio \
     MIDI \
