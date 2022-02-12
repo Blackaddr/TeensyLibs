@@ -13,6 +13,7 @@ LIBRARY_LIST = \
     Adafruit_BusIO \
     Adafruit-GFX-Library \
     Adafruit_SSD1306 \
+    Adafruit_SH1106 \
     WDT_T4 \
     EEPROM
 

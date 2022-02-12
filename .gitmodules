@@ -46,3 +46,6 @@
 [submodule "libs/Teensy-4.x-Quad-Encoder-Library"]
 	path = libs/Teensy-4.x-Quad-Encoder-Library
 	url = https://github.com/mjs513/Teensy-4.x-Quad-Encoder-Library.git
+[submodule "libs/Adafruit_SH1106"]
+	path = libs/Adafruit_SH1106
+	url = git@github.com:AlgorhythmTechnologies/Adafruit_SH1106.git
