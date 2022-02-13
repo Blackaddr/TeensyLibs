@@ -1,2 +1,2 @@
 #!/bin/sh
-patch -u ../libs/Audio/Audio.h -i Audio.h.patch
+patch -uN ../libs/Audio/Audio.h -i Audio.h.patch
