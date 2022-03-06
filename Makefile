@@ -15,7 +15,8 @@ LIBRARY_LIST = \
     Adafruit_SSD1306 \
     Adafruit_SH1106 \
     WDT_T4 \
-    EEPROM
+    EEPROM \
+    LittleFS
 
 all:
 	-cd ./patches && ./apply_patches && cd ..

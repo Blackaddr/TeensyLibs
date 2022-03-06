@@ -45,6 +45,7 @@ CPP_SRC_LIST += \
     /teensy4/serialEvent7 \
     /teensy4/serialEventUSB1 \
     /teensy4/serialEventUSB2 \
+    /teensy4/Time \
     /teensy4/usb_audio \
     /teensy4/usb_flightsim \
     /teensy4/usb_inst \
@@ -113,6 +114,7 @@ API_HEADER_LIST += \
     /teensy4/DMAChannel \
     /teensy4/elapsedMillis \
     /teensy4/EventResponder \
+    /teensy4/FS \
     /teensy4/HardwareSerial \
     /teensy4/imxrt \
     /teensy4/IntervalTimer \

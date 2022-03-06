@@ -1,2 +1,3 @@
 #!/bin/sh
 patch -uN ../libs/Audio/Audio.h -i Audio.h.patch
+patch -uN ../libs/LittleFS/src/LittleFS.cpp -i LittleFS.cpp.patch

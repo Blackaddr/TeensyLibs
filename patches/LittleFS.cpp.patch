@@ -1,0 +1,12 @@
+diff --git a/src/LittleFS.cpp b/src/LittleFS.cpp
+index 729dce7..e849429 100644
+--- a/src/LittleFS.cpp
++++ b/src/LittleFS.cpp
+@@ -51,6 +51,7 @@ PROGMEM static const struct chipinfo {
+ {{0xEF, 0x80, 0x19}, 32, 256, 65536, 0xDC, 33554432, 3000, 2000000, "W25Q256JW*M"}, // Winbond (W25Q256JW*M)
+ {{0xEF, 0x70, 0x20}, 32, 256, 65536, 0xDC, 67108864, 3500, 2000000, "W25Q512JV*M (DTR)"}, // Winbond W25Q512JV*M (DTR)
+ {{0x1F, 0x84, 0x01}, 24, 256,  4096, 0x20, 524288, 2500, 300000, "AT25SF041"},    // Adesto/Atmel AT25SF041
++{{0x1F, 0x87, 0x01}, 24, 256,  4096, 0x20, 1048576, 2500, 300000, "AT25SF321"},    // Adesto/Atmel AT25SF321
+ {{0x01, 0x40, 0x14}, 24, 256,  4096, 0x20, 1048576, 5000, 300000, "S25FL208K"},   // Spansion S25FL208K
+ //FRAM
+ {{0x03, 0x2E, 0xC2}, 24, 64, 128, 0, 1048576, 250, 1200, "CY15B108QN"}, //Cypress 8Mb FRAM, CY15B108QN
