@@ -16,7 +16,8 @@ LIBRARY_LIST = \
     Adafruit_SH1106 \
     WDT_T4 \
     EEPROM \
-    LittleFS
+    LittleFS \
+    TeensyDebug
 
 all:
 	-cd ./patches && ./apply_patches && cd ..

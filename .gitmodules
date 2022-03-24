@@ -52,3 +52,6 @@
 [submodule "libs/LittleFs"]
 	path = libs/LittleFS
 	url = https://github.com/PaulStoffregen/LittleFS.git
+[submodule "libs/TeensyDebug"]
+	path = libs/TeensyDebug
+	url = https://github.com/ftrias/TeensyDebug.git
