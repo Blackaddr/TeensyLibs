@@ -18,10 +18,10 @@
 	url = https://github.com/chipaudette/OpenAudio_ArduinoLibrary.git
 [submodule "libs/Adafruit-GFX-Library"]
 	path = libs/Adafruit-GFX-Library
-	url = ssh://git@github.com/adafruit/Adafruit-GFX-Library.git
+	url = https://github.com/adafruit/Adafruit-GFX-Library.git
 [submodule "libs/Adafruit_BusIO"]
 	path = libs/Adafruit_BusIO
-	url = ssh://git@github.com/adafruit/Adafruit_BusIO.git
+	url = https://github.com/adafruit/Adafruit_BusIO.git
 [submodule "libs/Adafruit_SSD1306"]
 	path = libs/Adafruit_SSD1306
 	url = https://github.com/adafruit/Adafruit_SSD1306.git
