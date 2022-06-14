@@ -16,6 +16,7 @@ LIBRARY_LIST = \
     Adafruit_SH1106 \
     WDT_T4 \
     EEPROM \
+    Crypto \
     LittleFS \
     TeensyDebug
 
