@@ -59,6 +59,7 @@ C_SRC_LIST = \
     /teensy4/delay \
     /teensy4/digital \
     /teensy4/eeprom \
+    /teensy4/fuse \
     /teensy4/interrupt \
     /teensy4/keylayouts \
     /teensy4/nonstd \
