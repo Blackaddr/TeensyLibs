@@ -13,7 +13,7 @@ DOC_PATH_DOXYGEN =
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
 #CPP_SRC_LIST  = $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/src/*.cpp)))
 #CPP_SRC_LIST += $(subst ./$(REPO_DIR)/$(TARGET_NAME)/,/, $(subst .cpp,,$(wildcard ./$(REPO_DIR)/$(TARGET_NAME)/utility/*.cpp)))
-CPP_SRC_LIST = Crypto Ed25519 SHA256 Hash BigNumberUtil
+CPP_SRC_LIST = Crypto Ed25519 Curve25519 SHA512 SHA256 Hash BigNumberUtil
    
 C_SRC_LIST =
 
