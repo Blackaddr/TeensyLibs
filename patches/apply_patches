@@ -1,3 +1,5 @@
 #!/bin/sh
 patch -uN ../libs/Audio/Audio.h -i Audio.h.patch
 patch -uN ../libs/LittleFS/src/LittleFS.cpp -i LittleFS.cpp.patch
+patch -uN ../libs/cores/teensy4/AudioStream.cpp -i AudioStream.cpp.patch
+patch -uN ../libs/cores/teensy4/AudioStream.h -i AudioStream.h.patch
