@@ -1,5 +1,5 @@
 diff --git a/teensy4/AudioStream.h b/teensy4/AudioStream.h
-index 77f136e..2604f75 100644
+index 77f136e..becfd2a 100644
 --- a/teensy4/AudioStream.h
 +++ b/teensy4/AudioStream.h
 @@ -64,11 +64,13 @@
@@ -28,7 +28,7 @@ index 77f136e..2604f75 100644
  #define AudioMemory(num) ({ \
  	static DMAMEM audio_block_t data[num]; \
 -	AudioStream::initialize_memory(data, num); \
-+    dataBuffers[AUDIO_BLOCK_SAMPLES*num]; \
++	DMAMEM __attribute__((aligned(32))) static int16_t dataBuffers[AUDIO_BLOCK_SAMPLES*num]; \
 +	AudioStream::initialize_memory(data, num, dataBuffers); \
  })
  
