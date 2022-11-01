@@ -1,5 +1,5 @@
 diff --git a/teensy4/usb_desc.h b/teensy4/usb_desc.h
-index bcea877..ab04eb0 100644
+index bcea877..ac3bee6 100644
 --- a/teensy4/usb_desc.h
 +++ b/teensy4/usb_desc.h
 @@ -736,10 +736,15 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
@@ -16,8 +16,8 @@ index bcea877..ab04eb0 100644
 +  //#define PRODUCT_NAME_LEN	17
 +  #define MANUFACTURER_NAME   {'A','v','i','a','t','e',' ','A','u','d','i','o'}
 +  #define MANUFACTURER_NAME_LEN       12
-+  #define PRODUCT_NAME                {'M','u','l','t','i','v','e','r','s','e',' ','A','u','d','i','o'}
-+  #define PRODUCT_NAME_LEN    16
++  #define PRODUCT_NAME                {'A','v','i','a','t','e',' ','A','u','d','i','o',' ','M','u','l','t','i','v','e','r','s','e'}
++  #define PRODUCT_NAME_LEN    23
 +
    #define EP0_SIZE		64
    #define NUM_ENDPOINTS         6
