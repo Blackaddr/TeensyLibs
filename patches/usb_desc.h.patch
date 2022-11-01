@@ -1,0 +1,24 @@
+diff --git a/teensy4/usb_desc.h b/teensy4/usb_desc.h
+index bcea877..ab04eb0 100644
+--- a/teensy4/usb_desc.h
++++ b/teensy4/usb_desc.h
+@@ -736,10 +736,15 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
+ #elif defined(USB_MIDI_AUDIO_SERIAL)
+   #define VENDOR_ID		0x16C0
+   #define PRODUCT_ID		0x048A
+-  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+-  #define MANUFACTURER_NAME_LEN	11
+-  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','/','A','u','d','i','o'}
+-  #define PRODUCT_NAME_LEN	17
++  //#define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
++  //#define MANUFACTURER_NAME_LEN	11
++  //#define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','/','A','u','d','i','o'}
++  //#define PRODUCT_NAME_LEN	17
++  #define MANUFACTURER_NAME   {'A','v','i','a','t','e',' ','A','u','d','i','o'}
++  #define MANUFACTURER_NAME_LEN       12
++  #define PRODUCT_NAME                {'M','u','l','t','i','v','e','r','s','e',' ','A','u','d','i','o'}
++  #define PRODUCT_NAME_LEN    16
++
+   #define EP0_SIZE		64
+   #define NUM_ENDPOINTS         6
+   #define NUM_INTERFACE		6
