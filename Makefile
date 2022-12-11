@@ -22,9 +22,9 @@ LIBRARY_LIST = \
 
 all:
 	-cd ./patches && ./apply_patches && cd ..
-	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)
+	$(foreach libname, $(LIBRARY_LIST), $(MAKE) -f Makefile.$(libname) $(MAKECMDGOALS);)
 
 $(MAKECMDGOALS):
 	-cd ./patches && ./apply_patches && cd ..
-	$(foreach libname, $(LIBRARY_LIST), make -f Makefile.$(libname) $(MAKECMDGOALS);)
+	$(foreach libname, $(LIBRARY_LIST), $(MAKE) -f Makefile.$(libname) $(MAKECMDGOALS);)
 
