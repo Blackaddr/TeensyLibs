@@ -48,7 +48,7 @@
 	url = https://github.com/mjs513/Teensy-4.x-Quad-Encoder-Library.git
 [submodule "libs/Adafruit_SH1106"]
 	path = libs/Adafruit_SH1106
-	url = git@github.com:AlgorhythmTechnologies/Adafruit_SH1106.git
+	url = git@bitbucket.org:aviateaudio/adafruit_sh1106.git
 [submodule "libs/LittleFs"]
 	path = libs/LittleFS
 	url = https://github.com/PaulStoffregen/LittleFS.git
