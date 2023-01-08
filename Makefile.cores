@@ -50,7 +50,7 @@ CPP_SRC_LIST += \
     /teensy4/usb_flightsim \
     /teensy4/usb_inst \
     /teensy4/yield
-   
+
 C_SRC_LIST = \
     /teensy4/analog \
     /teensy4/bootdata \
@@ -103,6 +103,7 @@ API_HEADER_LIST += \
     /teensy4/arm_const_structs \
     /teensy4/arm_math \
     /teensy4/AudioStream \
+    /teensy4/AudioSampleRate \
     /teensy4/avr_emulation \
     /teensy4/avr_functions \
     /teensy4/binary \
@@ -172,7 +173,7 @@ SYS_LIBS_DIRS =
 
 # List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
 # example: SYS_STAT_LIBS_LIST = wscSysUtil wscFrame
-SYS_STAT_LIBS_LIST = 
+SYS_STAT_LIBS_LIST =
 
 PREPROC_DEFINES_LIST =
 
@@ -181,4 +182,3 @@ MAKEFILE_NAME ?= Makefile
 # This library must always use it's local, custom build engine.
 export TEENSY_BUILD_ENGINE_LOC = $(CURDIR)/scripts/teensylibs_build_engine/
 include $(TEENSY_BUILD_ENGINE_LOC)/Makefile.inc
-

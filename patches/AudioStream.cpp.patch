@@ -1,22 +1,38 @@
 diff --git a/teensy4/AudioStream.cpp b/teensy4/AudioStream.cpp
-index 232928b..0cc4afd 100644
+index 232928b..12b4337 100644
 --- a/teensy4/AudioStream.cpp
 +++ b/teensy4/AudioStream.cpp
-@@ -38,6 +38,9 @@
+@@ -28,8 +28,8 @@
+  * SOFTWARE.
+  */
+ 
+-
+ #include <Arduino.h>
++#include <cstring>  // for std::memset()
+ #include "AudioStream.h"
+ 
+ #if defined(__IMXRT1062__)
+@@ -38,6 +38,11 @@
  
  #define NUM_MASKS  (((MAX_AUDIO_MEMORY / AUDIO_BLOCK_SAMPLES / 2) + 31) / 32)
  
 +extern const unsigned AUDIO_SAMPLES_PER_BLOCK = AUDIO_BLOCK_SAMPLES;
 +extern const float    AUDIO_SAMPLE_RATE_HZ    = AUDIO_SAMPLE_RATE_EXACT;
 +
++volatile int8_t audio_traversal_array[MAX_TRAVERSAL_BYTES];
++
  audio_block_t * AudioStream::memory_pool;
  uint32_t AudioStream::memory_pool_available_mask[NUM_MASKS];
  uint16_t AudioStream::memory_pool_first_mask;
-@@ -46,13 +49,14 @@ uint16_t AudioStream::cpu_cycles_total = 0;
+@@ -46,13 +51,18 @@ uint16_t AudioStream::cpu_cycles_total = 0;
  uint16_t AudioStream::cpu_cycles_total_max = 0;
  uint16_t AudioStream::memory_used = 0;
  uint16_t AudioStream::memory_used_max = 0;
 +AudioConnection* AudioStream::unused = NULL; // linked list of unused but not destructed connections
++
++bool AudioStream::use_ordered_update = false;
++AudioStream* AudioStream::step_update_object = nullptr;
++AudioStream** AudioStream::ordered_update_array = nullptr;
  
  void software_isr(void);
  
@@ -28,14 +44,14 @@ index 232928b..0cc4afd 100644
  {
  	unsigned int i;
  	unsigned int maxnum = MAX_AUDIO_MEMORY / AUDIO_BLOCK_SAMPLES / 2;
-@@ -71,9 +75,21 @@ FLASHMEM void AudioStream::initialize_memory(audio_block_t *data, unsigned int n
+@@ -71,9 +81,22 @@ FLASHMEM void AudioStream::initialize_memory(audio_block_t *data, unsigned int n
  	}
  	for (i=0; i < num; i++) {
  		data[i].memory_pool_index = i;
 +		if (dataBuffers) {
 +			data[i].data = dataBuffers + i*AUDIO_BLOCK_SAMPLES;
 +		}
-+	}
+ 	}
 +	if (update_scheduled == false) {
 +		// if no hardware I/O has taken responsibility for update,
 +		// start a timer which will call update_all() at the correct rate
@@ -45,13 +61,14 @@ index 232928b..0cc4afd 100644
 +			timer->begin(update_all, usec);
 +			update_setup();
 +		}
- 	}
++	}
++    std::memset((void*)audio_traversal_array, 255, MAX_TRAVERSAL_BYTES);  // initialize to -1
  	__enable_irq();
 -
  }
  
  // Allocate 1 audio data block.  If successful
-@@ -151,8 +167,8 @@ void AudioStream::transmit(audio_block_t *block, unsigned char index)
+@@ -151,8 +174,8 @@ void AudioStream::transmit(audio_block_t *block, unsigned char index)
  {
  	for (AudioConnection *c = destination_list; c != NULL; c = c->next_dest) {
  		if (c->src_index == index) {
@@ -62,7 +79,7 @@ index 232928b..0cc4afd 100644
  				block->ref_count++;
  			}
  		}
-@@ -183,104 +199,229 @@ audio_block_t * AudioStream::receiveWritable(unsigned int index)
+@@ -183,104 +206,229 @@ audio_block_t * AudioStream::receiveWritable(unsigned int index)
  	inputQueue[index] = NULL;
  	if (in && in->ref_count > 1) {
  		p = allocate();
@@ -221,11 +238,11 @@ index 232928b..0cc4afd 100644
 +
 +		src->numConnections++;
 +		src->active = true;
- 
--	isConnected = true;
++
 +		dst->numConnections++;
 +		dst->active = true;
-+
+ 
+-	isConnected = true;
 +		isConnected = true;
 +
 +		result = 0;
@@ -234,9 +251,8 @@ index 232928b..0cc4afd 100644
  	__enable_irq();
 +
 +	return result;
- }
- 
--void AudioConnection::disconnect(void)
++}
++
 +
 +int AudioConnection::connect(AudioStream &source, unsigned char sourceOutput,
 +		AudioStream &destination, unsigned char destinationInput)
@@ -253,8 +269,9 @@ index 232928b..0cc4afd 100644
 +		result = connect();
 +	}
 +	return result;
-+}
-+
+ }
+ 
+-void AudioConnection::disconnect(void)
 +int AudioConnection::disconnect(void)
  {
  	AudioConnection *p;
@@ -342,3 +359,140 @@ index 232928b..0cc4afd 100644
  }
  
  
+@@ -307,6 +455,54 @@ void AudioStream::update_stop(void)
+ 	update_scheduled = false;
+ }
+ 
++void AudioStream::setOrderedUpdate(bool orderedUpdate) {
++
++	use_ordered_update = orderedUpdate;
++	if (!use_ordered_update || ordered_update_array) { return; }
++
++	int idx = 0;
++	int num_objects = 0;
++	AudioStream *p = AudioStream::first_update;
++	for (p = AudioStream::first_update; p; p = p->next_update) { num_objects++; }  // get the number of objects
++
++	ordered_update_array = (AudioStream**)malloc(num_objects * sizeof(AudioStream*));
++	if (!ordered_update_array) { if (Serial) { Serial.printf("AudioStream::setOrderedUpdate(): unable to allocate array\n\r"); Serial.flush(); } return; }
++
++	// populate the ordered list
++	step_update_object = nullptr;
++	unsigned objects_remaining = num_objects;
++	unsigned loopLimit = 100;
++	while ((objects_remaining > 0) && (loopLimit-- > 0)) {
++		for (p = AudioStream::first_update; p; p = p->next_update) {
++			//if (Serial) { Serial.printf("setOrderedUpdate(): scanning object %d, looking for %d, objects remaining: %d\n\r", p->id, idx, objects_remaining); Serial.flush(); }
++			if ((p->id == UPDATE_STEP_OBJECT_ID) && (!step_update_object)) {
++				step_update_object = p;
++				objects_remaining--;
++			} else if (p->id == idx) {
++				ordered_update_array[idx] = p;
++				idx++;
++				objects_remaining--;
++			}
++		}
++	}
++	if ((!step_update_object) || (loopLimit == 0)) {
++		//if (Serial && !step_update_object) { Serial.printf("ERROR: step_update_object is not valid\n\r"); }
++		//if (Serial && (loopLimit == 0)) { Serial.printf("ERROR: step_update_object is not valid\n\r"); }
++		orderedUpdate = false;
++	}
++	ordered_update_array[idx] = nullptr; // terminate the list
++
++	// if (Serial) {
++	// 	Serial.printf("\n*** AUDIOSTREAM ARRAY\n\r");
++	// 	for (int i=0; i < num_objects; i++) {
++	// 		if (ordered_update_array[i]) {
++	// 			Serial.printf("idx:%d  id:%d  Addr:0x%08X\n\r", i, ordered_update_array[i]->id, ordered_update_array[i]);
++	// 		} else { Serial.printf("idx:%d  Addr:0x%08X\n\r", i, ordered_update_array[i]);}
++	// 	}
++	// 	Serial.printf("\n\rNum objects:%d  StepObject:%d\n\r", idx, step_update_object ? true : false);
++	// }
++}
++
+ AudioStream * AudioStream::first_update = NULL;
+ 
+ void software_isr(void) // AudioStream::update_all()
+@@ -315,15 +511,67 @@ void software_isr(void) // AudioStream::update_all()
+ 
+ 	uint32_t totalcycles = ARM_DWT_CYCCNT;
+ 	//digitalWriteFast(2, HIGH);
+-	for (p = AudioStream::first_update; p; p = p->next_update) {
+-		if (p->active) {
+-			uint32_t cycles = ARM_DWT_CYCCNT;
+-			p->update();
+-			// TODO: traverse inputQueueArray and release
+-			// any input blocks that weren't consumed?
+-			cycles = (ARM_DWT_CYCCNT - cycles) >> 6;
+-			p->cpu_cycles = cycles;
+-			if (cycles > p->cpu_cycles_max) p->cpu_cycles_max = cycles;
++
++    if (AudioStream::use_ordered_update) {
++		// with ordered update mode, we walk through the audio_traversal_array.
++		// Each entry is a pair of integers. The first number is the update index to call
++		// with the step_update_object. Typically this is a X-point switch. The second number
++		// is the AudioStream ID, which is not used when calling the step_update_object.
++		// If the first number is negative, then the call is to the AudioStream ID provided
++		// as the second number.
++		// If both numbers are negative, we are done.
++		//if (!AudioStream::step_update_object) { AudioStream::use_ordered_update = false; return; }
++		unsigned idx = 0;
++		unsigned loopLimit = 50;
++
++        while(loopLimit-- > 0) {
++			int8_t stepIndex  = audio_traversal_array[idx];
++			int8_t objectId = audio_traversal_array[idx+1];
++			if (stepIndex == -1 && objectId == -1) { break; }  // we are done
++			idx += 2;
++
++			if ( ((stepIndex) >= 0) && AudioStream::step_update_object) {  // run the update step object first
++			    p = AudioStream::step_update_object;
++				if (p->active) {
++					uint32_t cycles = ARM_DWT_CYCCNT;
++					p->updateIndex(stepIndex);
++					cycles = (ARM_DWT_CYCCNT - cycles) >> 6;
++					p->cpu_cycles = cycles;
++					if (cycles > p->cpu_cycles_max) p->cpu_cycles_max = cycles;
++				}
++			} else {  // run the update on the AudioStream ID object
++				if (objectId >= 0) {
++					p = AudioStream::ordered_update_array[objectId];
++					if (!p) {
++						//if (Serial) { Serial.printf("software_isr(): null AudioStream object encountered\n\r"); }
++						continue;
++					}
++					if (p->active) {
++						uint32_t cycles = ARM_DWT_CYCCNT;
++						p->update();
++						cycles = (ARM_DWT_CYCCNT - cycles) >> 6;
++						p->cpu_cycles = cycles;
++						if (cycles > p->cpu_cycles_max) p->cpu_cycles_max = cycles;
++					}
++				}
++			}
++		}
++		//if (loopLimit == 0) { if (Serial) { Serial.printf("software_isr(): loop limit reached\n\r"); } }
++
++		// reset and release step_update input buffers
++		if (AudioStream::step_update_object) { AudioStream::step_update_object->updateIndex(-1); }
++
++	} else {  // original processing by PJRC
++		for (p = AudioStream::first_update; p; p = p->next_update) {
++			if (p->active) {
++				uint32_t cycles = ARM_DWT_CYCCNT;
++				p->update();
++				// TODO: traverse inputQueueArray and release
++				// any input blocks that weren't consumed?
++				cycles = (ARM_DWT_CYCCNT - cycles) >> 6;
++				p->cpu_cycles = cycles;
++				if (cycles > p->cpu_cycles_max) p->cpu_cycles_max = cycles;
++			}
+ 		}
+ 	}
+ 	//digitalWriteFast(2, LOW);
+@@ -334,4 +582,3 @@ void software_isr(void) // AudioStream::update_all()
+ 
+ 	asm("DSB");
+ }
+-

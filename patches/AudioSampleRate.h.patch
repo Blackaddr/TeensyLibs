@@ -1,0 +1,13 @@
+diff --git a/teensy4/AudioSampleRate.h b/teensy4/AudioSampleRate.h
+new file mode 100644
+index 0000000..9e54a05
+--- /dev/null
++++ b/teensy4/AudioSampleRate.h
+@@ -0,0 +1,6 @@
++#ifndef AudioSampleRate_h
++#define AudioSampleRate_h
++
++#define AUDIO_SAMPLE_RATE_HZ_F 48000.0f
++
++#endif
+\ No newline at end of file

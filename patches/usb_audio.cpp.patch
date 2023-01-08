@@ -1,0 +1,88 @@
+diff --git a/teensy4/usb_audio.cpp b/teensy4/usb_audio.cpp
+index fa492a5..f66ccc8 100644
+--- a/teensy4/usb_audio.cpp
++++ b/teensy4/usb_audio.cpp
+@@ -131,7 +131,7 @@ void AudioInputUSB::begin(void)
+ 
+ static void copy_to_buffers(const uint32_t *src, int16_t *left, int16_t *right, unsigned int len)
+ {
+-	uint32_t *target = (uint32_t*) src + len; 
++	uint32_t *target = (uint32_t*) src + len;
+ 	while ((src < target) && (((uintptr_t) left & 0x02) != 0)) {
+ 		uint32_t n = *src++;
+ 		*left++ = n & 0xFFFF;
+@@ -323,15 +323,17 @@ static void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsi
+ 	}
+ }
+ 
++
+ void AudioOutputUSB::update(void)
+ {
+ 	audio_block_t *left, *right;
+ 
+ 	// TODO: we shouldn't be writing to these......
+-	//left = receiveReadOnly(0); // input 0 = left channel
+-	//right = receiveReadOnly(1); // input 1 = right channel
+-	left = receiveWritable(0); // input 0 = left channel
+-	right = receiveWritable(1); // input 1 = right channel
++	left = receiveReadOnly(0); // input 0 = left channel
++	right = receiveReadOnly(1); // input 1 = right channel
++	//left = receiveWritable(0); // input 0 = left channel
++	//right = receiveWritable(1); // input 1 = right channel
++
+ 	if (usb_audio_transmit_setting == 0) {
+ 		if (left) release(left);
+ 		if (right) release(right);
+@@ -348,15 +350,17 @@ void AudioOutputUSB::update(void)
+ 			if (right) release(right);
+ 			return;
+ 		}
+-		memset(left->data, 0, sizeof(left->data));
++		//memset(left->data, 0, sizeof(left->data));
++		memset(left->data, 0, sizeof(int16_t)*AUDIO_SAMPLES_PER_BLOCK);
+ 	}
+ 	if (right == NULL) {
+ 		right = allocate();
+ 		if (right == NULL) {
+-			release(left);
++			if (left) release(left);
+ 			return;
+ 		}
+-		memset(right->data, 0, sizeof(right->data));
++		//memset(right->data, 0, sizeof(right->data));
++		memset(right->data, 0, sizeof(int16_t)*AUDIO_SAMPLES_PER_BLOCK);
+ 	}
+ 	__disable_irq();
+ 	if (left_1st == NULL) {
+@@ -390,15 +394,15 @@ void AudioOutputUSB::update(void)
+ unsigned int usb_audio_transmit_callback(void)
+ {
+ 	static uint32_t count=5;
+-	uint32_t avail, num, target, offset, len=0;
++	uint32_t avail, num, target =48, offset, len=0;
+ 	audio_block_t *left, *right;
+ 
+-	if (++count < 10) {   // TODO: dynamic adjust to match USB rate
+-		target = 44;
+-	} else {
+-		count = 0;
+-		target = 45;
+-	}
++	// if (++count < 10) {   // TODO: dynamic adjust to match USB rate
++	// 	target = 48;
++	// } else {
++	// 	count = 0;
++	// 	target = 49;
++	// }
+ 	while (len < target) {
+ 		num = target - len;
+ 		left = AudioOutputUSB::left_1st;
+@@ -498,7 +502,7 @@ int usb_audio_get_feature(void *stp, uint8_t *data, uint32_t *datalen)
+ 	return 0;
+ }
+ 
+-int usb_audio_set_feature(void *stp, uint8_t *buf) 
++int usb_audio_set_feature(void *stp, uint8_t *buf)
+ {
+ 	struct setup_struct setup = *((struct setup_struct *)stp);
+ 	if (setup.bmRequestType==0x21) { // should check bRequest, bChannel and UnitID

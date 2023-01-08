@@ -4,3 +4,7 @@ patch -uN -d ../libs/LittleFS/src/ LittleFS.cpp -i ${PWD}/LittleFS.cpp.patch
 patch -uN -d ../libs/cores/teensy4/ AudioStream.cpp -i ${PWD}/AudioStream.cpp.patch
 patch -uN -d ../libs/cores/teensy4/ AudioStream.h -i ${PWD}/AudioStream.h.patch
 patch -uN -d ../libs/cores/teensy4/ usb_desc.h -i ${PWD}/usb_desc.h.patch
+patch -uN -d ../libs/cores/teensy4/ usb_desc.c -i ${PWD}/usb_desc.c.patch
+patch -uN -d ../libs/cores/teensy4/ usb.c -i ${PWD}/usb.c.patch
+patch -uN -d ../libs/cores/teensy4/ AudioSampleRate.h -i ${PWD}/AudioSampleRate.h.patch
+patch -uN -d ../libs/cores/teensy4/ usb_audio.cpp -i ${PWD}/usb_audio.cpp.patch
