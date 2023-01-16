@@ -1,5 +1,5 @@
 diff --git a/teensy4/AudioStream.cpp b/teensy4/AudioStream.cpp
-index 232928b..12b4337 100644
+index 232928b..54df985 100644
 --- a/teensy4/AudioStream.cpp
 +++ b/teensy4/AudioStream.cpp
 @@ -28,8 +28,8 @@
@@ -208,7 +208,8 @@ index 232928b..12b4337 100644
 +			result = 5;
 +			break;
 +		}
-+
+ 
+-	isConnected = true;
 +		// Now try to add this connection to the source's destination list
 +		p = src->destination_list; // first AudioConnection
 +		if (p == NULL)
@@ -241,8 +242,7 @@ index 232928b..12b4337 100644
 +
 +		dst->numConnections++;
 +		dst->active = true;
- 
--	isConnected = true;
++
 +		isConnected = true;
 +
 +		result = 0;
@@ -251,8 +251,9 @@ index 232928b..12b4337 100644
  	__enable_irq();
 +
 +	return result;
-+}
-+
+ }
+ 
+-void AudioConnection::disconnect(void)
 +
 +int AudioConnection::connect(AudioStream &source, unsigned char sourceOutput,
 +		AudioStream &destination, unsigned char destinationInput)
@@ -269,9 +270,8 @@ index 232928b..12b4337 100644
 +		result = connect();
 +	}
 +	return result;
- }
- 
--void AudioConnection::disconnect(void)
++}
++
 +int AudioConnection::disconnect(void)
  {
  	AudioConnection *p;
@@ -359,7 +359,7 @@ index 232928b..12b4337 100644
  }
  
  
-@@ -307,6 +455,54 @@ void AudioStream::update_stop(void)
+@@ -307,6 +455,57 @@ void AudioStream::update_stop(void)
  	update_scheduled = false;
  }
  
@@ -374,7 +374,10 @@ index 232928b..12b4337 100644
 +	for (p = AudioStream::first_update; p; p = p->next_update) { num_objects++; }  // get the number of objects
 +
 +	ordered_update_array = (AudioStream**)malloc(num_objects * sizeof(AudioStream*));
-+	if (!ordered_update_array) { if (Serial) { Serial.printf("AudioStream::setOrderedUpdate(): unable to allocate array\n\r"); Serial.flush(); } return; }
++	if (!ordered_update_array) {
++		//if (Serial) { Serial.printf("AudioStream::setOrderedUpdate(): unable to allocate array\n\r"); Serial.flush(); }
++		return;
++	}
 +
 +	// populate the ordered list
 +	step_update_object = nullptr;
@@ -414,7 +417,7 @@ index 232928b..12b4337 100644
  AudioStream * AudioStream::first_update = NULL;
  
  void software_isr(void) // AudioStream::update_all()
-@@ -315,15 +511,67 @@ void software_isr(void) // AudioStream::update_all()
+@@ -315,15 +514,72 @@ void software_isr(void) // AudioStream::update_all()
  
  	uint32_t totalcycles = ARM_DWT_CYCCNT;
  	//digitalWriteFast(2, HIGH);
@@ -441,6 +444,7 @@ index 232928b..12b4337 100644
 +		unsigned loopLimit = 50;
 +
 +        while(loopLimit-- > 0) {
++
 +			int8_t stepIndex  = audio_traversal_array[idx];
 +			int8_t objectId = audio_traversal_array[idx+1];
 +			if (stepIndex == -1 && objectId == -1) { break; }  // we are done
@@ -448,6 +452,7 @@ index 232928b..12b4337 100644
 +
 +			if ( ((stepIndex) >= 0) && AudioStream::step_update_object) {  // run the update step object first
 +			    p = AudioStream::step_update_object;
++				//Serial.printf("Step:%d id:%d addr:%08X\n\r", stepIndex, objectId, p);
 +				if (p->active) {
 +					uint32_t cycles = ARM_DWT_CYCCNT;
 +					p->updateIndex(stepIndex);
@@ -458,6 +463,7 @@ index 232928b..12b4337 100644
 +			} else {  // run the update on the AudioStream ID object
 +				if (objectId >= 0) {
 +					p = AudioStream::ordered_update_array[objectId];
++					//Serial.printf("id:%d addr:%08X\n\r", objectId, p);
 +					if (!p) {
 +						//if (Serial) { Serial.printf("software_isr(): null AudioStream object encountered\n\r"); }
 +						continue;
@@ -473,12 +479,14 @@ index 232928b..12b4337 100644
 +			}
 +		}
 +		//if (loopLimit == 0) { if (Serial) { Serial.printf("software_isr(): loop limit reached\n\r"); } }
++		//Serial.printf("Loop limit %d\n\r", loopLimit);
 +
 +		// reset and release step_update input buffers
 +		if (AudioStream::step_update_object) { AudioStream::step_update_object->updateIndex(-1); }
 +
 +	} else {  // original processing by PJRC
 +		for (p = AudioStream::first_update; p; p = p->next_update) {
++			//Serial.printf("addr:%08X\n\r", p);
 +			if (p->active) {
 +				uint32_t cycles = ARM_DWT_CYCCNT;
 +				p->update();
@@ -491,7 +499,7 @@ index 232928b..12b4337 100644
  		}
  	}
  	//digitalWriteFast(2, LOW);
-@@ -334,4 +582,3 @@ void software_isr(void) // AudioStream::update_all()
+@@ -334,4 +590,3 @@ void software_isr(void) // AudioStream::update_all()
  
  	asm("DSB");
  }
