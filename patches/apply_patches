@@ -9,6 +9,9 @@ patch -uN -d ../libs/cores/teensy4/ usb.c -i ${PWD}/usb.c.patch
 patch -uN -d ../libs/cores/teensy4/ AudioSampleRate.h -i ${PWD}/AudioSampleRate.h.patch
 patch -uN -d ../libs/cores/teensy4/ usb_audio.cpp -i ${PWD}/usb_audio.cpp.patch
 
+patch -uN -d ../libs/cores/teensy4/ Time.cpp -i ${PWD}/Time.cpp.patch
+patch -uN -d ../libs/cores/teensy4/ avr_functions.h -i ${PWD}/avr_functions.h.patch
+
 # Patch the USB MIDI because it is broken in the TeensyDuinio release we use
 # https://forum.pjrc.com/threads/71267-USB-isolator-solution-for-Teensy-4-0-(vs-T3-6)?p=314107
 # This can be removed once we update to head of master for Teensy cores Library

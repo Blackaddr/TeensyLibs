@@ -1,5 +1,5 @@
 diff --git a/teensy4/usb_audio.cpp b/teensy4/usb_audio.cpp
-index fa492a5..f66ccc8 100644
+index fa492a5..c5e7b9d 100644
 --- a/teensy4/usb_audio.cpp
 +++ b/teensy4/usb_audio.cpp
 @@ -131,7 +131,7 @@ void AudioInputUSB::begin(void)
@@ -54,11 +54,13 @@ index fa492a5..f66ccc8 100644
  	}
  	__disable_irq();
  	if (left_1st == NULL) {
-@@ -390,15 +394,15 @@ void AudioOutputUSB::update(void)
+@@ -389,16 +393,16 @@ void AudioOutputUSB::update(void)
+ // no data to transmit
  unsigned int usb_audio_transmit_callback(void)
  {
- 	static uint32_t count=5;
+-	static uint32_t count=5;
 -	uint32_t avail, num, target, offset, len=0;
++	//static uint32_t count=5;
 +	uint32_t avail, num, target =48, offset, len=0;
  	audio_block_t *left, *right;
  
