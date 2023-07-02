@@ -8,6 +8,7 @@ patch -uN -d ../libs/cores/teensy4/ usb_desc.c -i ${PWD}/usb_desc.c.patch
 patch -uN -d ../libs/cores/teensy4/ usb.c -i ${PWD}/usb.c.patch
 patch -uN -d ../libs/cores/teensy4/ AudioSampleRate.h -i ${PWD}/AudioSampleRate.h.patch
 patch -uN -d ../libs/cores/teensy4/ usb_audio.cpp -i ${PWD}/usb_audio.cpp.patch
+patch -uN -d ../libs/cores/teensy4/ wiring.h -i ${PWD}/wiring.h.patch
 
 patch -uN -d ../libs/cores/teensy4/ Time.cpp -i ${PWD}/Time.cpp.patch
 patch -uN -d ../libs/cores/teensy4/ avr_functions.h -i ${PWD}/avr_functions.h.patch

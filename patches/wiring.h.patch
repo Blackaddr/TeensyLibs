@@ -1,0 +1,28 @@
+diff --git a/teensy4/wiring.h b/teensy4/wiring.h
+index 071e610..8ff6066 100644
+--- a/teensy4/wiring.h
++++ b/teensy4/wiring.h
+@@ -137,18 +137,20 @@ constexpr auto max(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::f
+ #define DISPLAY 1
+ 
+ // undefine stdlib's abs if encountered
+-#ifdef abs
+-#undef abs
+-#endif
++//#ifdef abs
++//#undef abs
++//#endif
+ 
+ #if __cplusplus >= 201103L && defined(__STRICT_ANSI__)
+ #define typeof(a) decltype(a)
+ #endif
+ 
++#if 0
+ #define abs(x) ({ \
+   typeof(x) _x = (x); \
+   (_x > 0) ? _x : -_x; \
+ })
++#endif
+ #define constrain(amt, low, high) ({ \
+   typeof(amt) _amt = (amt); \
+   typeof(low) _low = (low); \
