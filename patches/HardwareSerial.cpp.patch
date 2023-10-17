@@ -1,0 +1,39 @@
+diff --git a/teensy4/HardwareSerial.cpp b/teensy4/HardwareSerial.cpp
+index fe3cb08..034de2e 100644
+--- a/teensy4/HardwareSerial.cpp
++++ b/teensy4/HardwareSerial.cpp
+@@ -148,17 +148,17 @@ void HardwareSerial::begin(uint32_t baud, uint16_t format)
+ 		 	*(hardware->rx_pins[rx_pin_index_].select_input_register) =  hardware->rx_pins[rx_pin_index_].select_val;		
+ 		}	
+ 
+-		*(portControlRegister(hardware->tx_pins[tx_pin_index_].pin)) =  IOMUXC_PAD_SRE | IOMUXC_PAD_DSE(3) | IOMUXC_PAD_SPEED(3);
+-		*(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = hardware->tx_pins[tx_pin_index_].mux_val;
++		//*(portControlRegister(hardware->tx_pins[tx_pin_index_].pin)) =  IOMUXC_PAD_SRE | IOMUXC_PAD_DSE(3) | IOMUXC_PAD_SPEED(3);
++		//*(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = hardware->tx_pins[tx_pin_index_].mux_val;
+ 	} else {
+ 		// Half duplex maybe different pin pad config like PU...		
+-		*(portControlRegister(hardware->tx_pins[tx_pin_index_].pin)) =  IOMUXC_PAD_SRE | IOMUXC_PAD_DSE(3) | IOMUXC_PAD_SPEED(3) 
+-				| IOMUXC_PAD_PKE | IOMUXC_PAD_PUE | IOMUXC_PAD_PUS(3);
+-		*(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = hardware->tx_pins[tx_pin_index_].mux_val;
++		// *(portControlRegister(hardware->tx_pins[tx_pin_index_].pin)) =  IOMUXC_PAD_SRE | IOMUXC_PAD_DSE(3) | IOMUXC_PAD_SPEED(3) 
++		// 		| IOMUXC_PAD_PKE | IOMUXC_PAD_PUE | IOMUXC_PAD_PUS(3);
++		// *(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = hardware->tx_pins[tx_pin_index_].mux_val;
+ 	}
+-	if (hardware->tx_pins[tx_pin_index_].select_input_register) {
+-	 	*(hardware->tx_pins[tx_pin_index_].select_input_register) =  hardware->tx_pins[tx_pin_index_].select_val;		
+-	}	
++	// if (hardware->tx_pins[tx_pin_index_].select_input_register) {
++	//  	*(hardware->tx_pins[tx_pin_index_].select_input_register) =  hardware->tx_pins[tx_pin_index_].select_val;		
++	// }	
+ 	//hardware->rx_mux_register = hardware->rx_mux_val;
+ 	//hardware->tx_mux_register = hardware->tx_mux_val;
+ 
+@@ -237,7 +237,7 @@ void HardwareSerial::end(void)
+ 
+ 	// Not sure if this is best, but I think most IO pins default to Mode 5? which appears to be digital IO? 
+ 	*(portConfigRegister(hardware->rx_pins[rx_pin_index_].pin)) = 5;
+-	*(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = 5;
++	//*(portConfigRegister(hardware->tx_pins[tx_pin_index_].pin)) = 5;
+ 
+ 
+ 	// Might need to clear out other areas as well? 
