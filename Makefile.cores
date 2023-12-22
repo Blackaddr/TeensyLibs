@@ -12,7 +12,6 @@ DOC_PATH_DOXYGEN =
 
 # List of source files (do not include extentions.  E.g. 'MyClass', not 'MyClass.cpp')
 CPP_SRC_LIST += \
-    /teensy4/AudioStream \
     /teensy4/CrashReport \
     /teensy4/DMAChannel \
     /teensy4/EventResponder \
@@ -50,6 +49,8 @@ CPP_SRC_LIST += \
     /teensy4/usb_flightsim \
     /teensy4/usb_inst \
     /teensy4/yield
+
+#     /teensy4/AudioStream \
 
 C_SRC_LIST = \
     /teensy4/analog \

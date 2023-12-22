@@ -7,7 +7,6 @@ LIBRARY_LIST = \
     Encoder \
     Teensy-4.x-Quad-Encoder-Library \
     Bounce2 \
-    Audio \
     MIDI \
     TeensyThreads \
     Adafruit_BusIO \
@@ -19,6 +18,8 @@ LIBRARY_LIST = \
     Crypto \
     LittleFS \
     TeensyDebug
+
+# Audio
 
 all:
 	-cd ./patches && ./apply_patches && cd ..

@@ -1,17 +1,19 @@
 diff --git a/teensy4/AudioStream.h b/teensy4/AudioStream.h
-index 77f136e..be43866 100644
+index 77f136e..b40f5dc 100644
 --- a/teensy4/AudioStream.h
 +++ b/teensy4/AudioStream.h
-@@ -34,6 +34,8 @@
+@@ -34,6 +34,10 @@
  #ifndef __ASSEMBLER__
  #include <stdio.h>  // for NULL
  #include <string.h> // for memcpy
 +#include <atomic>
++#include <imxrt.h>
++#include <core_pins.h>
 +#include "AudioSampleRate.h"
  
  #endif
  
-@@ -55,57 +57,74 @@
+@@ -55,57 +59,74 @@
  #endif
  
  #ifndef AUDIO_SAMPLE_RATE_EXACT
@@ -109,7 +111,7 @@ index 77f136e..be43866 100644
  })
  
  #define CYCLE_COUNTER_APPROX_PERCENT(n) (((float)((uint32_t)(n) * 6400u) * (float)(AUDIO_SAMPLE_RATE_EXACT / AUDIO_BLOCK_SAMPLES)) / (float)(F_CPU_ACTUAL))
-@@ -141,7 +160,7 @@ public:
+@@ -141,7 +162,7 @@ public:
  			cpu_cycles_max = 0;
  			numConnections = 0;
  		}
@@ -118,7 +120,7 @@ index 77f136e..be43866 100644
  	float processorUsage(void) { return CYCLE_COUNTER_APPROX_PERCENT(cpu_cycles); }
  	float processorUsageMax(void) { return CYCLE_COUNTER_APPROX_PERCENT(cpu_cycles_max); }
  	void processorUsageMaxReset(void) { cpu_cycles_max = cpu_cycles; }
-@@ -152,6 +171,11 @@ public:
+@@ -152,6 +173,11 @@ public:
  	static uint16_t cpu_cycles_total_max;
  	static uint16_t memory_used;
  	static uint16_t memory_used_max;
@@ -130,8 +132,12 @@ index 77f136e..be43866 100644
  protected:
  	bool active;
  	unsigned char num_inputs;
-@@ -165,18 +189,55 @@ protected:
- 	static void update_all(void) { NVIC_SET_PENDING(IRQ_SOFTWARE); }
+@@ -162,21 +188,58 @@ protected:
+ 	audio_block_t * receiveWritable(unsigned int index = 0);
+ 	static bool update_setup(void);
+ 	static void update_stop(void);
+-	static void update_all(void) { NVIC_SET_PENDING(IRQ_SOFTWARE); }
++	static void update_all(void);
  	friend void software_isr(void);
  	friend class AudioConnection;
 +#if defined(AUDIO_DEBUG_CLASS)
