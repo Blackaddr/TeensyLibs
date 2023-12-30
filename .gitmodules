@@ -55,6 +55,3 @@
 [submodule "libs/TeensyDebug"]
 	path = libs/TeensyDebug
 	url = https://github.com/ftrias/TeensyDebug.git
-[submodule "libs/CryptoRepo"]
-	path = libs/CryptoRepo
-	url = git@bitbucket.org:aviateaudio/cryptorepo.git

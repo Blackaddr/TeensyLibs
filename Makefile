@@ -15,11 +15,10 @@ LIBRARY_LIST = \
     Adafruit_SH1106 \
     WDT_T4 \
     EEPROM \
-    Crypto \
     LittleFS \
     TeensyDebug
 
-# Audio
+# Audio, Crypto
 
 all:
 	-cd ./patches && ./apply_patches && cd ..
