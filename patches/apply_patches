@@ -13,6 +13,9 @@ patch -uN -d ../libs/cores/teensy4/ wiring.h -i ${PWD}/wiring.h.patch
 patch -uN -d ../libs/cores/teensy4/ Time.cpp -i ${PWD}/Time.cpp.patch
 patch -uN -d ../libs/cores/teensy4/ avr_functions.h -i ${PWD}/avr_functions.h.patch
 
+patch -uN -d ../libs/cores/teensy4/ Print.h -i ${PWD}/Print.h.patch
+patch -uN -d ../libs/cores/teensy4/ Print.cpp -i ${PWD}/Print.cpp.patch
+
 # disable default UART TX pin because we use that one for SPI
 patch -uN -d ../libs/cores/teensy4/ HardwareSerial.cpp -i ${PWD}/HardwareSerial.cpp.patch
 

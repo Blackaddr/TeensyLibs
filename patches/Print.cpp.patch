@@ -1,0 +1,17 @@
+diff --git a/teensy4/Print.cpp b/teensy4/Print.cpp
+index 9a63c46..ab55fb5 100644
+--- a/teensy4/Print.cpp
++++ b/teensy4/Print.cpp
+@@ -125,6 +125,12 @@ int Print::printf(const __FlashStringHelper *format, ...)
+ #endif
+ }
+ 
++int Print::vprintf( const char * format, va_list arg )
++{
++	int retval = vdprintf((int)this, format, arg);
++	return retval;
++}
++
+ size_t Print::printNumber(unsigned long n, uint8_t base, uint8_t sign)
+ {
+ 	uint8_t buf[34];
