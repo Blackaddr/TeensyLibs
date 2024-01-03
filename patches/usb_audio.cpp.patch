@@ -1,16 +1,55 @@
 diff --git a/teensy4/usb_audio.cpp b/teensy4/usb_audio.cpp
-index fa492a5..c5e7b9d 100644
+index fa492a5..172f723 100644
 --- a/teensy4/usb_audio.cpp
 +++ b/teensy4/usb_audio.cpp
-@@ -131,7 +131,7 @@ void AudioInputUSB::begin(void)
+@@ -67,7 +67,7 @@ volatile uint32_t usb_audio_underrun_count;
+ volatile uint32_t usb_audio_overrun_count;
  
- static void copy_to_buffers(const uint32_t *src, int16_t *left, int16_t *right, unsigned int len)
+ 
+-static void rx_event(transfer_t *t)
++void rx_event(transfer_t *t)
+ {
+ 	if (t) {
+ 		int len = AUDIO_RX_SIZE - ((rx_transfer.status >> 16) & 0x7FFF);
+@@ -79,7 +79,7 @@ static void rx_event(transfer_t *t)
+ 	usb_receive(AUDIO_RX_ENDPOINT, &rx_transfer);
+ }
+ 
+-static void sync_event(transfer_t *t)
++void sync_event(transfer_t *t)
+ {
+ 	// USB 2.0 Specification, 5.12.4.2 Feedback, pages 73-75
+ 	//printf("sync %x\n", sync_transfer.status); // too slow, can't print this much
+@@ -129,9 +129,9 @@ void AudioInputUSB::begin(void)
+ 	update_responsibility = false;
+ }
+ 
+-static void copy_to_buffers(const uint32_t *src, int16_t *left, int16_t *right, unsigned int len)
++void copy_to_buffers(const uint32_t *src, int16_t *left, int16_t *right, unsigned int len)
  {
 -	uint32_t *target = (uint32_t*) src + len; 
 +	uint32_t *target = (uint32_t*) src + len;
  	while ((src < target) && (((uintptr_t) left & 0x02) != 0)) {
  		uint32_t n = *src++;
  		*left++ = n & 0xFFFF;
+@@ -297,7 +297,7 @@ uint16_t AudioOutputUSB::offset_1st;
+ /*DMAMEM*/ uint16_t usb_audio_transmit_buffer[AUDIO_TX_SIZE/2] __attribute__ ((used, aligned(32)));
+ 
+ 
+-static void tx_event(transfer_t *t)
++void tx_event(transfer_t *t)
+ {
+ 	int len = usb_audio_transmit_callback();
+ 	usb_audio_sync_feedback = feedback_accumulator >> usb_audio_sync_rshift;
+@@ -314,7 +314,7 @@ void AudioOutputUSB::begin(void)
+ 	right_1st = NULL;
+ }
+ 
+-static void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsigned int len)
++void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsigned int len)
+ {
+ 	// TODO: optimize...
+ 	while (len > 0) {
 @@ -323,15 +323,17 @@ static void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsi
  	}
  }
