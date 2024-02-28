@@ -1,5 +1,5 @@
 diff --git a/teensy4/usb_audio.cpp b/teensy4/usb_audio.cpp
-index fa492a5..172f723 100644
+index fa492a5..603d287 100644
 --- a/teensy4/usb_audio.cpp
 +++ b/teensy4/usb_audio.cpp
 @@ -67,7 +67,7 @@ volatile uint32_t usb_audio_underrun_count;
@@ -20,7 +20,17 @@ index fa492a5..172f723 100644
  {
  	// USB 2.0 Specification, 5.12.4.2 Feedback, pages 73-75
  	//printf("sync %x\n", sync_transfer.status); // too slow, can't print this much
-@@ -129,9 +129,9 @@ void AudioInputUSB::begin(void)
+@@ -94,7 +94,8 @@ void usb_audio_configure(void)
+ 	printf("usb_audio_configure\n");
+ 	usb_audio_underrun_count = 0;
+ 	usb_audio_overrun_count = 0;
+-	feedback_accumulator = 739875226; // 44.1 * 2^24
++	//feedback_accumulator = 739875226; // 44.1 * 2^24
++    feedback_accumulator = (AUDIO_SAMPLE_RATE_HZ_F / 1000.0f) * 16777216.0f;  // Sample rate in Khz * 2^24
+ 	if (usb_high_speed) {
+ 		usb_audio_sync_nbytes = 4;
+ 		usb_audio_sync_rshift = 8;
+@@ -129,9 +130,9 @@ void AudioInputUSB::begin(void)
  	update_responsibility = false;
  }
  
@@ -32,7 +42,7 @@ index fa492a5..172f723 100644
  	while ((src < target) && (((uintptr_t) left & 0x02) != 0)) {
  		uint32_t n = *src++;
  		*left++ = n & 0xFFFF;
-@@ -297,7 +297,7 @@ uint16_t AudioOutputUSB::offset_1st;
+@@ -297,7 +298,7 @@ uint16_t AudioOutputUSB::offset_1st;
  /*DMAMEM*/ uint16_t usb_audio_transmit_buffer[AUDIO_TX_SIZE/2] __attribute__ ((used, aligned(32)));
  
  
@@ -41,7 +51,7 @@ index fa492a5..172f723 100644
  {
  	int len = usb_audio_transmit_callback();
  	usb_audio_sync_feedback = feedback_accumulator >> usb_audio_sync_rshift;
-@@ -314,7 +314,7 @@ void AudioOutputUSB::begin(void)
+@@ -314,7 +315,7 @@ void AudioOutputUSB::begin(void)
  	right_1st = NULL;
  }
  
@@ -50,7 +60,7 @@ index fa492a5..172f723 100644
  {
  	// TODO: optimize...
  	while (len > 0) {
-@@ -323,15 +323,17 @@ static void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsi
+@@ -323,15 +324,17 @@ static void copy_from_buffers(uint32_t *dst, int16_t *left, int16_t *right, unsi
  	}
  }
  
@@ -72,7 +82,7 @@ index fa492a5..172f723 100644
  	if (usb_audio_transmit_setting == 0) {
  		if (left) release(left);
  		if (right) release(right);
-@@ -348,15 +350,17 @@ void AudioOutputUSB::update(void)
+@@ -348,15 +351,17 @@ void AudioOutputUSB::update(void)
  			if (right) release(right);
  			return;
  		}
@@ -93,7 +103,7 @@ index fa492a5..172f723 100644
  	}
  	__disable_irq();
  	if (left_1st == NULL) {
-@@ -389,16 +393,16 @@ void AudioOutputUSB::update(void)
+@@ -389,16 +394,16 @@ void AudioOutputUSB::update(void)
  // no data to transmit
  unsigned int usb_audio_transmit_callback(void)
  {
@@ -118,7 +128,7 @@ index fa492a5..172f723 100644
  	while (len < target) {
  		num = target - len;
  		left = AudioOutputUSB::left_1st;
-@@ -498,7 +502,7 @@ int usb_audio_get_feature(void *stp, uint8_t *data, uint32_t *datalen)
+@@ -498,7 +503,7 @@ int usb_audio_get_feature(void *stp, uint8_t *data, uint32_t *datalen)
  	return 0;
  }
  
