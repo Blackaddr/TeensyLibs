@@ -20,8 +20,11 @@ patch -uN -d ../libs/cores/teensy4/ Print.cpp -i ${PWD}/Print.cpp.patch
 # disable default UART TX pin because we use that one for SPI
 patch -uN -d ../libs/cores/teensy4/ HardwareSerial.cpp -i ${PWD}/HardwareSerial.cpp.patch
 
-
 # Patch the USB MIDI because it is broken in the TeensyDuinio release we use
 # https://forum.pjrc.com/threads/71267-USB-isolator-solution-for-Teensy-4-0-(vs-T3-6)?p=314107
 # This can be removed once we update to head of master for Teensy cores Library
 patch -uN -d ../libs/cores/teensy4/ usb_midi.c -i ${PWD}/usb_midi.c.patch
+
+# Patch Adafruit_GFX.cpp because the getTextBounds() returns different string lengths based
+# on the offset of the char that breaks right-align calculations
+patch -uN -d ../libs/Adafruit-GFX-Library/ Adafruit_GFX.cpp -i ${PWD}/Adafruit_GFX.cpp.patch
