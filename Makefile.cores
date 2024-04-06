@@ -112,6 +112,7 @@ API_HEADER_LIST += \
     /teensy4/core_cmInstr \
     /teensy4/core_id \
     /teensy4/core_pins \
+    /teensy4/CrashReport \
     /teensy4/DMAChannel \
     /teensy4/elapsedMillis \
     /teensy4/EventResponder \
