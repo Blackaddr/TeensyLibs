@@ -102,8 +102,6 @@ API_HEADER_LIST += \
     /teensy4/arm_common_tables \
     /teensy4/arm_const_structs \
     /teensy4/arm_math \
-    /teensy4/AudioStream \
-    /teensy4/AudioSampleRate \
     /teensy4/avr_emulation \
     /teensy4/avr_functions \
     /teensy4/binary \
@@ -152,6 +150,9 @@ API_HEADER_LIST += \
     /teensy4/WProgram \
     /teensy4/WString
 
+#    /teensy4/AudioStream
+#    /teensy4/AudioSampleRate
+
 API_HEADER_DIRS_LIST += \
     /teensy4/avr \
     /teensy4/debug \
@@ -163,7 +164,6 @@ DEP_BUILD_LIST =
 
 # List of system include/lib directories not checked by default by your compiler.
 # Always use the -I=<dir> and -L=<dir> syntax, not -I<dir>, etc.
-#-Isrc/i2c/$(TARGET_OS) - is needed to include the correct i2cOs.h
 SYS_INC_DIRS  = \
     -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/ \
     -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/avr \
@@ -172,7 +172,7 @@ SYS_INC_DIRS  = \
 SYS_LIBS_DIRS =
 
 # List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
-# example: SYS_STAT_LIBS_LIST = wscSysUtil wscFrame
+# example: SYS_STAT_LIBS_LIST =
 SYS_STAT_LIBS_LIST =
 
 PREPROC_DEFINES_LIST =

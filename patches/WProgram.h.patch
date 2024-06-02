@@ -1,0 +1,13 @@
+diff --git a/teensy4/WProgram.h b/teensy4/WProgram.h
+index 4758078..a996b92 100644
+--- a/teensy4/WProgram.h
++++ b/teensy4/WProgram.h
+@@ -57,7 +57,7 @@
+ #include "usb_rawhid.h"
+ #include "usb_flightsim.h"
+ //#include "usb_mtp.h"
+-#include "usb_audio.h"
++//#include "usb_audio.h"
+ #include "usb_touch.h"
+ //#include "usb_undef.h" // do not allow usb_desc.h stuff to leak to user programs
+ 
