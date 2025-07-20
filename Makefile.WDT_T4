@@ -4,7 +4,7 @@ LIB_MINOR_VER = 0
 LIB_PATCH_VER = 0
 LIB_VER = $(LIB_MAJOR_VER).$(LIB_MINOR_VER).$(LIB_PATCH_VER)
 
-# Name of the library (do not prefix with 'lib'), e.g. wscMyUtil
+# Name of the library (do not prefix with 'lib'), e.g. MyUtil
 REPO_DIR = libs
 TARGET_NAME = WDT_T4
 
@@ -36,8 +36,8 @@ DEP_BUILD_LIST =
 SYS_INC_DIRS  = 
 SYS_LIBS_DIRS =
 
-# List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
-# example: SYS_STAT_LIBS_LIST = wscSysUtil wscFrame
+# List of libraries to be compiled and linked statically. This can only be used for BSD and other similar permissively-licensed software
+# example: SYS_STAT_LIBS_LIST = SysUtil Frame
 SYS_STAT_LIBS_LIST = 
 
 PREPROC_DEFINES_LIST =

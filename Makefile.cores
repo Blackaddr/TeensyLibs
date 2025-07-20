@@ -4,7 +4,7 @@ LIB_MINOR_VER = 0
 LIB_PATCH_VER = 0
 LIB_VER = $(LIB_MAJOR_VER).$(LIB_MINOR_VER).$(LIB_PATCH_VER)
 
-# Name of the library (do not prefix with 'lib'), e.g. wscMyUtil
+# Name of the library (do not prefix with 'lib'), e.g. MyUtil
 REPO_DIR = libs
 TARGET_NAME = cores
 
@@ -171,7 +171,7 @@ SYS_INC_DIRS  = \
     -I$(CURDIR)/$(REPO_DIR)/$(TARGET_NAME)/teensy4/debug
 SYS_LIBS_DIRS =
 
-# List of libraries to be compiled and linked statically. This can only be used for Wescam code, BSD and other similar permissively-licensed software
+# List of libraries to be compiled and linked statically. This can only be used for BSD and other similar permissively-licensed software
 # example: SYS_STAT_LIBS_LIST =
 SYS_STAT_LIBS_LIST =
 
