@@ -49,3 +49,9 @@
 [submodule "libs/TeensyDebug"]
 	path = libs/TeensyDebug
 	url = https://github.com/ftrias/TeensyDebug.git
+[submodule "scripts/teensylibs_build_engine"]
+	path = scripts/teensylibs_build_engine
+	url = git@github.com:Blackaddr/teensylibs_build_engine.git
+[submodule "libs/Adafruit_SH1106"]
+	path = libs/Adafruit_SH1106
+	url = git@github.com:Blackaddr/adafruit_sh1106.git
