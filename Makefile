@@ -18,8 +18,6 @@ LIBRARY_LIST = \
     LittleFS \
     TeensyDebug
 
-# Audio, Crypto
-
 all:
 	-cd ./patches && ./apply_patches && cd ..
 	$(foreach libname, $(LIBRARY_LIST), $(MAKE) -f Makefile.$(libname) $(MAKECMDGOALS);)
